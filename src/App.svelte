@@ -1,8 +1,22 @@
 <script>
+	import Nested from './Nested.svelte'
 	export let name;
 	let age = 18
 	let count = 0
+	// 响应式声明
 	$: doubled = count *2
+	// 只要更改count 的值，我们就可以在控制台输出它的值
+    $: console.log(`the count is ${count}`);
+	$: {
+		console.log(`the count is ${count}`);
+		alert(`I SAID THE COUNT IS ${count}`);
+	}
+	//你甚至可以将$:放在一个if语句之前：
+	$: if (count >= 10) {
+		alert(`count is dangerously high!`);
+		count = 9;
+	}
+
 	function handleClick() {
 		count += 1
 	}
@@ -15,6 +29,7 @@
 		Clicked {count} {count===1?'time':'times'}
 	</button>
 	<p>{count} doubled is {doubled}</p>
+	<Nested answer={45} />
 </main>
 
 <style>
