@@ -30,6 +30,8 @@
 	</button>
 	<p>{count} doubled is {doubled}</p>
 	<Nested answer={45} />
+	<Nested  />
+	<!-- <Info {...pkg}/> -->
 </main>
 
 <style>
