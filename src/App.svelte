@@ -8,7 +8,7 @@
 	// 只要更改count 的值，我们就可以在控制台输出它的值
     $: console.log(`the count is ${count}`);
 	$: {
-		console.log(`the count is ${count}`);
+		//console.log(`the count is ${count}`);
 		alert(`I SAID THE COUNT IS ${count}`);
 	}
 	//你甚至可以将$:放在一个if语句之前：
@@ -20,6 +20,33 @@
 	function handleClick() {
 		count += 1
 	}
+
+	let user = { loggedIn: false }
+	function toggle() {
+	    user.loggedIn = !user.loggedIn;
+	  }
+
+	let cats = [
+		{ id: 'J---aiyznGQ', name: 'Keyboard Cat' },
+		{ id: 'z_AbfPXTKms', name: 'Maru' },
+		{ id: 'OUtn3pvWmpg', name: 'Henri The Existential Cat' }
+	];
+
+	import Thing from './Thing.svelte';
+
+	  let things = [
+	    { id: 1, color: 'darkblue' },
+	    { id: 2, color: 'indigo' },
+	    { id: 3, color: 'deeppink' },
+	    { id: 4, color: 'salmon' },
+	    { id: 5, color: 'gold' }
+	  ];
+
+	  function handleClick1() {
+	    things = things.slice(1);
+	  }
+
+
 </script>
 
 <main>
@@ -32,6 +59,26 @@
 	<Nested answer={45} />
 	<Nested  />
 	<!-- <Info {...pkg}/> -->
+	{#if user.loggedIn}
+	  <button on:click={toggle}>Log out</button>
+	{:else}
+	  <button on:click={toggle}>Log in</button>
+	{/if}
+
+	{#each cats as cat}
+		<li>
+		<a target="_blank" href="https://www.youtube.com/watch?v={cat.id}">
+			{cat.name}
+		</a>
+		</li>
+	{/each}
+
+	<button on:click={handleClick1}>Remove first thing</button>
+
+	{#each things as thing}
+	  <Thing current={thing.color}/>
+	{/each}
+
 </main>
 
 <style>
